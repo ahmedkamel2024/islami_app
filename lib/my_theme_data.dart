@@ -40,6 +40,9 @@ class MyThemeData {
           color: AppColors.blackColor,
           fontSize: 20,
           fontWeight: FontWeight.w400),
-    ),
-  );
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+      )));
 }
