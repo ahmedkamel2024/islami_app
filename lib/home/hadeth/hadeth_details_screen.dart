@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/home/hadeth/hadeth_tab.dart';
 import 'package:islami_app/home/hadeth/item_hadeth_details.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/app_mode_provider.dart';
 
 class HadethDetailsScreen extends StatefulWidget {
   static const String routeName = 'hadeth_details_screen';
@@ -15,9 +18,12 @@ class HadethDetailsScreen extends StatefulWidget {
 class _HadethDetailsScreenState extends State<HadethDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppModeProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as Hadeth;
     return Stack(children: [
-      Image.asset('assets/images/main_background.png'),
+      provider.isDarkMode()
+          ? Image.asset('assets/images/background_dark.png')
+          : Image.asset('assets/images/main_background.png'),
       Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -33,13 +39,15 @@ class _HadethDetailsScreenState extends State<HadethDetailsScreen> {
             vertical: MediaQuery.of(context).size.height * 0.06,
           ),
           decoration: BoxDecoration(
-              color: AppColors.whiteColor,
+              color: provider.isDarkMode()
+                  ? AppColors.primaryDarkColor
+                  : AppColors.whiteColor,
               borderRadius: BorderRadius.circular(25)),
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return const Divider(
                 color: AppColors.primaryColor,
-                thickness: 1,
+                thickness: 0,
               );
             },
             itemBuilder: (context, index) {

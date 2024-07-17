@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_colors.dart';
+import '../../provider/app_mode_provider.dart';
 
 class RadioTab extends StatelessWidget {
   const RadioTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppModeProvider>(context);
     return Scaffold(
       body: Center(
         child: Container(
@@ -32,7 +35,9 @@ class RadioTab extends StatelessWidget {
                     icon: Icon(
                       Icons.skip_previous,
                       size: 60,
-                      color: AppColors.primaryColor,
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryColor,
                     ),
                     onPressed: () {
                       // Add your previous button functionality here
@@ -42,7 +47,9 @@ class RadioTab extends StatelessWidget {
                     icon: Icon(
                       Icons.play_arrow,
                       size: 60,
-                      color: AppColors.primaryColor,
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryColor,
                     ),
                     onPressed: () {
                       // Add your play button functionality here
@@ -52,7 +59,9 @@ class RadioTab extends StatelessWidget {
                     icon: Icon(
                       Icons.skip_next,
                       size: 60,
-                      color: AppColors.primaryColor,
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryColor,
                     ),
                     onPressed: () {
                       // Add your next button functionality here

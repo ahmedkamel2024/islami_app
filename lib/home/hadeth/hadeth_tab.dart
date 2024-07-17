@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/home/hadeth/item_hadeth_name.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_colors.dart';
+import '../../provider/app_mode_provider.dart';
 
 class HadethTab extends StatefulWidget {
   @override
@@ -21,20 +24,25 @@ class _HadethTabState extends State<HadethTab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppModeProvider>(context);
     loadHadethFile();
     return Column(
       children: [
         Expanded(child: Image.asset('assets/images/hadeth_logo.png')),
-        const Divider(
-          color: AppColors.primaryColor,
+        Divider(
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryColor,
           thickness: 2,
         ),
         Text(
-          'Hadeth Name',
+          AppLocalizations.of(context)!.hadeth_name,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Divider(
-          color: AppColors.primaryColor,
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryColor,
           thickness: 2,
         ),
         Expanded(
@@ -47,8 +55,10 @@ class _HadethTabState extends State<HadethTab> {
                 )
               : ListView.separated(
                   separatorBuilder: (context, index) {
-                    return const Divider(
-                      color: AppColors.primaryColor,
+                    return Divider(
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryColor,
                       thickness: 2,
                     );
                   },

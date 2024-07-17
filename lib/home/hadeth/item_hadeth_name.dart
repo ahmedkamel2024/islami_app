@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/home/hadeth/hadeth_tab.dart';
+
 import 'hadeth_details_screen.dart';
 
 class ItemHadethName extends StatelessWidget {
@@ -12,7 +13,7 @@ class ItemHadethName extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context)
-            .pushNamed(HadethDetailsScreen.routeName, arguments: Hadeth);
+            .pushNamed(HadethDetailsScreen.routeName, arguments: hadeth);
       },
       child: Text(
         hadeth.title,
