@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/home/quran/item_sura_details.dart';
+import 'package:islami_app/provider/app_mode_provider.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'sura_details_screen';
@@ -17,12 +19,15 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppModeProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty) {
       loadFile(args.index);
     }
     return Stack(children: [
-      Image.asset('assets/images/main_background.png'),
+      provider.isDarkMode()
+          ? Image.asset('assets/images/background_dark.png')
+          : Image.asset('assets/images/main_background.png'),
       Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -44,12 +49,16 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                   vertical: MediaQuery.of(context).size.height * 0.06,
                 ),
                 decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
+                    color: provider.isDarkMode()
+                        ? AppColors.primaryDarkColor
+                        : AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(25)),
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
-                    return const Divider(
-                      color: AppColors.primaryColor,
+                    return Divider(
+                      color: provider.isDarkMode()
+                          ? AppColors.yellowColor
+                          : AppColors.primaryColor,
                       thickness: 1,
                     );
                   },

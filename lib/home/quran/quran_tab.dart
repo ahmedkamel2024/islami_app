@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/home/quran/item_sura_name.dart';
+import 'package:islami_app/provider/app_mode_provider.dart';
+import 'package:provider/provider.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> names = [
@@ -122,19 +125,24 @@ class QuranTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppModeProvider>(context);
     return Column(
       children: [
         Expanded(child: Image.asset('assets/images/quran_logo.png')),
         Divider(
-          color: AppColors.primaryColor,
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryColor,
           thickness: 2,
         ),
         Text(
-          'Sura Name',
+          AppLocalizations.of(context)!.sura_name,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Divider(
-          color: AppColors.primaryColor,
+          color: provider.isDarkMode()
+              ? AppColors.yellowColor
+              : AppColors.primaryColor,
           thickness: 2,
         ),
         Expanded(
@@ -142,8 +150,10 @@ class QuranTab extends StatelessWidget {
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return Divider(
-                color: AppColors.primaryColor,
-                thickness: 1,
+                color: provider.isDarkMode()
+                    ? AppColors.yellowColor
+                    : AppColors.primaryColor,
+                thickness: 2,
               );
             },
             itemBuilder: (context, index) {
